@@ -26,7 +26,7 @@ class Collector:
         self.engine_bot = None
         # self.api 객체를 만든다. (Openapi클래스의 인스턴스)
         # Openapi() 클래스를 통해 self.api 객체를 만들면 openapi프로그램이 실행 되면서 증권사 계정과 연동이 된다.
-        self.api = Openapi()
+        self.api = Openapi() #openapi.py module에 있는 Openapi class를 이용
         # self.item 객체를 만든다. (StockItem클래스의 인스턴스)
         # 코스피, 코스닥 종목 리스트를 가져온다.
         self.item = StockItem()
