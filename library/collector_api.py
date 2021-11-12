@@ -79,7 +79,7 @@ class collector_api():
         if rows[0][6] != self.open_api.today:
             self.realtime_daily_buy_list_check()
 
-        # min_craw db (분별 데이터) 업데이트
+        # min_craw db (분별 데이터) 업데이트 : 한번 요청 시 600분 치를 return 해준다., 최근 1년치 데이터만 제공해준다. 틱 데이터는 거래없을 때는 row가 만들어지지 않는다.
         if rows[0][8] != self.open_api.today:
             self.min_crawler_check()
 
