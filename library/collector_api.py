@@ -45,7 +45,7 @@ class collector_api():
         # kospi(stock_kospi), kosdaq(stock_kosdaq), konex(stock_konex)
         # 관리종목(stock_managing), 불성실법인종목(stock_insincerity) 업데이트
         if rows[0][0] != self.open_api.today:
-            self.get_code_list()  # 촬영 후 일부 업데이트 되었습니다.
+            self.get_code_list()  # 종목 list table을 DB에 저장
 
         # 촬영 후 콜렉팅 순서가 일부 업데이트 되었습니다.
         # 잔고 및 보유종목 현황 db setting  & 당일 종목별 실현 손익
