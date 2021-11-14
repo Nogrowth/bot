@@ -282,8 +282,8 @@ class simulator_func_mysql:
     def init_database(self):
         self.drop_database()
         self.create_database()
-        self.init_df_jango()
-        self.init_df_all_item()
+        self.init_df_jango()  # 비어있는 DF인 self.jango 를 생성
+        self.init_df_all_item()  # 마찬가지로 비어있는 DF인 self.df_all_item 생성
 
     # 데이터베이스를 생성하는 함수
     def create_database(self):
@@ -302,8 +302,8 @@ class simulator_func_mysql:
 
     # 데이터베이스의 존재 유무를 파악하는 함수.
     def is_simul_database_exist(self):
-        sql = "SELECT 1 FROM Information_schema.SCHEMATA WHERE SCHEMA_NAME = '%s'"
-        rows = self.engine_daily_buy_list.execute(sql % (self.db_name)).fetchall()
+        sql = "SELECT 1 FROM Information_schema.SCHEMATA WHERE SCHEMA_NAME = '%s'"  # formatting, Information_schema~는 mysql 내에 특정 이름의 db가 존재하면 1 !!
+        rows = self.engine_daily_buy_list.execute(sql % (self.db_name)).fetchall()  # sql 쿼리문을 daily_buy_list에 접근해서 실행하겠다. %s는 self.db_name, 즉 'simulator1'로 대체된다.
         print("rows : ", rows)
         if len(rows):
             return True
@@ -327,15 +327,15 @@ class simulator_func_mysql:
             self.db_name = "simulator" + str(self.simul_num)
             self.engine_simulator = create_engine(
                 "mysql+mysqldb://" + cf.db_id + ":" + cf.db_passwd + "@" + cf.db_ip + ":" + cf.db_port + "/" + str(
-                    self.db_name), encoding='utf-8')
+                    self.db_name), encoding='utf-8')  # simulator1 db에 접속하는 데 사용하는 객체
 
         self.engine_daily_craw = create_engine(
             "mysql+mysqldb://" + cf.db_id + ":" + cf.db_passwd + "@" + cf.db_ip + ":" + cf.db_port + "/daily_craw",
-            encoding='utf-8')
+            encoding='utf-8')  # 마찬가지 daily_craw db에 접속하는 객체
 
         self.engine_craw = create_engine(
             "mysql+mysqldb://" + cf.db_id + ":" + cf.db_passwd + "@" + cf.db_ip + ":" + cf.db_port + "/min_craw",
-            encoding='utf-8')
+            encoding='utf-8') # min_craw db에 접속하는 객체
         self.engine_daily_buy_list = create_engine(
             "mysql+mysqldb://" + cf.db_id + ":" + cf.db_passwd + "@" + cf.db_ip + ":" + cf.db_port + "/daily_buy_list",
             encoding='utf-8')
