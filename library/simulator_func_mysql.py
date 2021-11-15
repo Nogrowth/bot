@@ -567,7 +567,7 @@ class simulator_func_mysql:
         # 5 / 20 골든크로스 buy
         if self.db_to_realtime_daily_buy_list_num == 1:
             # orderby는 거래량 많은 순서
-
+            # 아래 query의 a는 table을 임시적으로 a라고 부르는 것!
             sql = "select * from `" + date_rows_yesterday + "` a where yes_clo20 > yes_clo5 and clo5 > clo20 " \
                                                             "and NOT exists (select null from stock_konex b where a.code=b.code) " \
                                                             "and close < '%s' group by code"
