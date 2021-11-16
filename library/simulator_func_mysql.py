@@ -386,7 +386,7 @@ class simulator_func_mysql:
         for j in range(self.len_df_realtime_daily_buy_list):
             if self.jango_check():
 
-                # 종목 코드를 가져온다.
+                # 종목 코드를 가져온다. rjust()는 6자리를 0으로 채우기(앞에)
                 code = str(self.df_realtime_daily_buy_list.loc[j, 'code']).rjust(6, "0")
 
                 # 종목명을 가져온다.
@@ -499,7 +499,7 @@ class simulator_func_mysql:
 
         self.len_df_realtime_daily_buy_list = len(self.df_realtime_daily_buy_list)
 
-    # 가장 최근의 daily_buy_list에 담겨 있는 날짜 테이블 이름을 가져오는 함수
+    # 가장 최근의 daily_buy_list에 담겨 있는 날짜 테이블 이름을 가져오는 함수`
     def get_recent_daily_buy_list_date(self):
         sql = "select TABLE_NAME from information_schema.tables where table_schema = 'daily_buy_list' and TABLE_NAME like '%s' order by table_name desc limit 1"
         row = self.engine_daily_buy_list.execute(sql % ("20%%")).fetchall()
@@ -625,6 +625,7 @@ class simulator_func_mysql:
                 # [to_sql]
                 # df_realtime_daily_buy_list 라는 데이터프레임을
                 # simulator 데이터베이스의 realtime_daily_buy_list 테이블로 만들어주는 명령
+                # .to_sql(만들 테이블 이름, simulaotr1이라는 db와 연결하는 engine, option)
                 #
                 # ** if_exists 옵션 **
                 # # 데이터베이스에 테이블이 존재할 때 수행 동작을 지정한다.
