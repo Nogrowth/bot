@@ -14,7 +14,7 @@ from PyQt5.QtWidgets import *
 from library.daily_buy_list import *
 from pandas import DataFrame
 
-# from kind_crawling import *
+from kind_crawling import *
 
 MARKET_KOSPI = 0
 MARKET_KOSDAQ = 10
@@ -26,7 +26,7 @@ class collector_api():
         self.open_api = open_api() # 이 open_api class를 통해 증권사 API와 연동할 수 있고, 메서드들을 이용하여 data를 받을 수 있다.
         self.engine_JB = self.open_api.engine_JB
         self.variable_setting()
-        # self.kind = KINDCrawler()
+        self.kind = KINDCrawler()
 
     def variable_setting(self):
         self.open_api.py_gubun = "collector"
@@ -83,7 +83,7 @@ class collector_api():
         if rows[0][8] != self.open_api.today:
             self.min_crawler_check()
 
-        # self.kind.craw()
+        self.kind.craw()
 
         logger.debug("collecting 작업을 모두 정상적으로 마쳤습니다.")
 

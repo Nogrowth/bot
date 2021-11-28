@@ -44,9 +44,12 @@ class daily_craw_config():
         # 한글로된 컬럼명을 영어로 바꿔준다.
         self.code_df_insincerity = self.code_df_insincerity.rename(columns={'회사명': 'code_name', '종목코드': 'code'})
 
+        # 받아온 것 중 종목 명이 없는 것들은 상장 폐지된것!!
+
     # 관리 종목을 가져오는 함수
     def get_item_managing(self):
         print("get_item_managing!!")
+        # URL 에 들어가서, method = download, searchType=01 로 넣어준 것임 - 검사 탭에서 열어준 다음 option value 를 확인할 수 있다
         self.code_df_managing = pd.read_html('http://kind.krx.co.kr/corpgeneral/corpList.do?method=download&searchType=01', header=0)[0]  # 종목코드가 6자리이기 때문에 6자리를 맞춰주기 위해 설정해줌
 
         # 6자리 만들고 앞에 0을 붙인다.strPath --> str(unicode(strPath))
@@ -57,6 +60,8 @@ class daily_craw_config():
 
         # 한글로된 컬럼명을 영어로 바꿔준다.
         self.code_df_managing = self.code_df_managing.rename(columns={'회사명': 'code_name', '종목코드': 'code'})
+
+        # 받아온 것 중 종목 명이 없는 것들은 상장 폐지된것!!
 
     # 코넥스 종목을 가져오는 함수
     def get_item_konex(self):
